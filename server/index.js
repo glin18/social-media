@@ -29,11 +29,15 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 // express.urlencoded allows you to recognize the incoming request object as a string or arrays
 
-app.use(helmet());
-app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
+// app.use(helmet());
+// app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 // Serves static files in express
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
@@ -50,7 +54,8 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // Routes with files
-app.post("/auth/register", upload.single("picture"), registerUser);
+// app.post("/auth/register", upload.single("picture"), registerUser);
+app.post("/auth/register", registerUser);
 
 // Mongoose Setup
 const PORT = process.env.PORT || 8001;
@@ -60,6 +65,8 @@ mongoose
     useUnifiedTopology: true,
   })
   .then(() => {
-    console.log(`LISTENING ON PORT ${PORT}`);
+    app.listen(PORT, () => {
+      console.log("LISTENING ON PORT " + PORT);
+    });
   })
   .catch((err) => console.log(err));

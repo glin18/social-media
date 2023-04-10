@@ -18,5 +18,20 @@ export const registerUser = async (req, res) => {
 
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
-  } catch (err) {}
+    const newUser = new User({
+      firstName,
+      lastName,
+      email,
+      password: passwordHash,
+      picturePath,
+      friends,
+      location,
+      occupation,
+      viewedProfile,
+    });
+    const savedUser = await newUser.save();
+    res.status(200).json(savedUser);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 };

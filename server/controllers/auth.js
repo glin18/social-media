@@ -36,3 +36,20 @@ export const registerUser = async (req, res) => {
     res.status(500).json({ error: err.message });
   }
 };
+
+// Logging in
+export const loginUser = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email });
+    if (!user) return res.status(500).json({ message: "User does not exist" });
+    const isMatch = bcrypt.compare(password, user.password);
+    if (!isMatch)
+      return res.status(500).json({ message: "Invalid Credentials" });
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+    delete user.password;
+    return res.status(200).json({ user, token });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+};

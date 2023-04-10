@@ -9,6 +9,7 @@ import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
 import { registerUser } from "./controllers/auth.js";
+import authRoutes from "./routes/auth.js";
 
 // We are using ES6 modules instead of CommonJS because of the type: module in package.json
 // Therefore, we need to redfine __filename and __dirname
@@ -33,11 +34,11 @@ app.use(express.urlencoded({ extended: true }));
 // app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 
-app.use(
-  cors({
-    origin: "*",
-  })
-);
+// app.use(
+//   cors({
+//     origin: "*",
+//   })
+// );
 // Serves static files in express
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 
@@ -56,6 +57,7 @@ const upload = multer({ storage });
 // Routes with files
 // app.post("/auth/register", upload.single("picture"), registerUser);
 app.post("/auth/register", registerUser);
+app.use("/auth", authRoutes);
 
 // Mongoose Setup
 const PORT = process.env.PORT || 8001;

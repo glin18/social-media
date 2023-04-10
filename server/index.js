@@ -9,18 +9,29 @@ import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
 
+// We are using ES6 modules instead of CommonJS because of the type: module in package.json
+// Therefore, we need to redfine __filename and __dirname
 const __filename = fileURLToPath(import.meta.url);
-console.log(__filename);
+// The above code works because ESM provides a new, standardized global called import.meta.url.
+// It’s available in all browsers and Node when running module code. It returns something like:
+// "file:///path/to/the/current/file.js"
 const __dirname = path.dirname(__filename);
-console.log(__dirname);
 
 dotenv.config();
 
 const app = express();
-app.use(express.json({ limit: "30mb" }));
+
+// For POST and PUT requests
+// Middleware to help deal with incoming data in the body of the request
+app.use(express.json());
+// express.json() allows you to recognize the incoming request object as a json object
+app.use(express.urlencoded({ extended: true }));
+// express.urlencoded allows you to recognize the incoming request object as a string or arrays
+
 app.use(helmet());
 app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
-app.use(express.urlencoded({ limit: "30mb", extended: true }));
+
 app.use(cors());
+// Serves static files in express
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));

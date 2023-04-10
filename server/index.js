@@ -8,6 +8,7 @@ import helmet from "helmet";
 import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
+// import { register } from "./controllers/auth.js";
 
 // We are using ES6 modules instead of CommonJS because of the type: module in package.json
 // Therefore, we need to redfine __filename and __dirname
@@ -48,11 +49,15 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage });
 
+// Routes with files
+// app.post("/auth/register", upload.single("picture"), register);
+
 // Mongoose Setup
 const PORT = process.env.PORT || 8001;
 mongoose
   .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
+    useUnifiedTopology: true,
   })
   .then(() => {
     console.log(`LISTENING ON PORT ${PORT}`);

@@ -10,6 +10,10 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { registerUser } from "./controllers/auth.js";
 import authRoutes from "./routes/auth.js";
+import { createPost } from "./controllers/posts.js";
+import { verifyToken } from "./middleware/auth.js";
+import userRoutes from "./routes/userRoutes.js";
+import postRoutes from "./routes/posts.js";
 
 // We are using ES6 modules instead of CommonJS because of the type: module in package.json
 // Therefore, we need to redfine __filename and __dirname
@@ -57,7 +61,11 @@ const upload = multer({ storage });
 // Routes with files
 // app.post("/auth/register", upload.single("picture"), registerUser);
 app.post("/auth/register", registerUser);
+app.post("/post/create", verifyToken, createPost);
+
 app.use("/auth", authRoutes);
+app.use("/user", userRoutes);
+app.use("/post", postRoutes);
 
 // Mongoose Setup
 const PORT = process.env.PORT || 8001;

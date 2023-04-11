@@ -20,9 +20,9 @@ export const getUserFriends = async (req, res) => {
     const friends = await Promise.all(
       user.friends.map((id) => User.findById(id))
     );
-    return res.status(200).json(friends);
+    res.status(200).json(friends);
   } catch (error) {
-    return res.status(404).json({ message: error.message });
+    res.status(404).json({ message: error.message });
   }
 };
 
@@ -45,6 +45,6 @@ export const addRemoveFriend = async (req, res) => {
 
     res.status(200).json({ user });
   } catch (error) {
-    return res.status(404).json({ message: error.message });
+    res.status(404).json({ message: error.message });
   }
 };

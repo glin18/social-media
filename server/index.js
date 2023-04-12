@@ -38,11 +38,12 @@ app.use(express.urlencoded({ extended: true }));
 // app.use(helmet.crossOriginResourcePolicy({ policy: "cross-origin" }));
 app.use(morgan("common"));
 
-// app.use(
-//   cors({
-//     origin: "*",
-//   })
-// );
+app.use(
+  cors({
+    origin: "http://localhost:3000",
+  })
+);
+
 // Serves static files in express
 app.use("/assets", express.static(path.join(__dirname, "public/assets")));
 

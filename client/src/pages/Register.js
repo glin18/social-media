@@ -6,12 +6,12 @@ const Register = () => {
   return (
     <Box
       sx={{
-        mt: 10,
+        mt: 6,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        gap: 4,
+        gap: 3,
       }}
     >
       <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
@@ -50,7 +50,9 @@ const Register = () => {
         type="password"
         sx={{ maxWidth: 400, width: "100%" }}
       />
-      <Button variant="contained">Register</Button>
+      <Button variant="contained" sx={{ mb: 3 }}>
+        Register
+      </Button>
     </Box>
   );
 };

@@ -1,5 +1,6 @@
 import React from "react";
-import { TextField, Box, Typography } from "@mui/material";
+import { TextField, Box, Typography, Button, Avatar } from "@mui/material";
+import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 const Register = () => {
   return (
@@ -10,12 +11,13 @@ const Register = () => {
         flexDirection: "column",
         alignItems: "center",
         justifyContent: "center",
-        gap: 5,
+        gap: 4,
       }}
     >
-      <Typography variant="h5" sx={{ mt: 5 }}>
-        Register
-      </Typography>
+      <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+        <LockOutlinedIcon />
+      </Avatar>
+      <Typography variant="h4">Register</Typography>
       <TextField
         id="outlined-basic"
         label="First Name"
@@ -36,22 +38,19 @@ const Register = () => {
       />
       <TextField
         id="outlined-basic"
-        label="Email"
+        label="Password"
+        type="password"
         variant="outlined"
         sx={{ maxWidth: 400, width: "100%" }}
       />
       <TextField
         id="outlined-basic"
-        label="Email"
+        label="Repeat Password"
         variant="outlined"
+        type="password"
         sx={{ maxWidth: 400, width: "100%" }}
       />
-      <TextField
-        id="outlined-basic"
-        label="Email"
-        variant="outlined"
-        sx={{ maxWidth: 400, width: "100%", mb: 10 }}
-      />
+      <Button variant="contained">Register</Button>
     </Box>
   );
 };

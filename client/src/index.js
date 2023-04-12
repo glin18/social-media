@@ -30,7 +30,7 @@ root.render(
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+            Social Media
           </Typography>
           <Button color="inherit">Login</Button>
         </Toolbar>

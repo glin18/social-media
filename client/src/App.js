@@ -1,5 +1,6 @@
 import "./App.css";
 import Register from "./pages/Register";
+import Login from "./pages/Login";
 import Container from "@mui/material/Container";
 import AuthNavbar from "./components/AuthNavbar";
 
@@ -8,7 +9,8 @@ function App() {
     <div className="App">
       <AuthNavbar />
       <Container maxWidth="xl">
-        <Register />
+        {/* <Register /> */}
+        <Login />
       </Container>
     </div>
   );

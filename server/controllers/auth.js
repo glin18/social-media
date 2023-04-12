@@ -8,6 +8,11 @@ export const registerUser = async (req, res) => {
     console.log("Registering user");
     const { firstName, lastName, email, password } = req.body;
     console.log("User retrieved");
+    const userExists = await User.findOne({ email });
+    if (userExists) {
+      res.status(400);
+      throw new Error("User already exists");
+    }
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
     const newUser = new User({

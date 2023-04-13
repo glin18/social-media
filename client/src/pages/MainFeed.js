@@ -12,16 +12,20 @@ const MainFeed = () => {
               sx={{
                 display: "flex",
                 alignItems: "center",
-                justifyContent: "space-evenly",
+                justifyContent: "space-between",
+                padding: 3,
               }}
             >
-              <Avatar>GL</Avatar>
-              <div>
-                <Typography>Gary Lin</Typography>
-                <Typography>3 Friends</Typography>
-              </div>
+              <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+                <Avatar>GL</Avatar>
+                <Box sx={{ mr: 5 }}>
+                  <Typography sx={{ fontWeight: "bold" }}>Gary Lin</Typography>
+                  <Typography>3 Friends</Typography>
+                </Box>
+              </Box>
               <PersonAddIcon />
             </Box>
+            <hr></hr>
           </Paper>
         </Grid>
         <Grid item xs={5}></Grid>

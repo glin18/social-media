@@ -3,11 +3,12 @@ import { Grid, Paper, Avatar, Typography, Box } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import WorkIcon from "@mui/icons-material/Work";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 const MainFeed = () => {
   return (
     <div>
-      <Grid container spacing={2}>
+      <Grid container spacing={5}>
         <Grid item xs={3.5}>
           <Paper elevation={3} sx={{ mt: 5, height: 600 }}>
             <Box
@@ -25,7 +26,7 @@ const MainFeed = () => {
                   <Typography>3 Friends</Typography>
                 </Box>
               </Box>
-              <PersonAddIcon />
+              <SettingsIcon />
             </Box>
             <hr></hr>
             <Box
@@ -59,7 +60,30 @@ const MainFeed = () => {
             <hr></hr>
           </Paper>
         </Grid>
-        <Grid item xs={5}></Grid>
+        <Grid item xs={5}>
+          <Paper elevation={3} sx={{ mt: 5, height: 600 }}>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                padding: 3,
+                gap: 2,
+                justifyContent: "space-between",
+              }}
+            >
+              <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+                <Avatar>RL</Avatar>
+                <Box>
+                  <Typography sx={{ fontWeight: "bold" }}>
+                    Robert Lin
+                  </Typography>
+                  <Typography>Vancouver, BC</Typography>
+                </Box>
+              </Box>
+              <PersonAddIcon />
+            </Box>
+          </Paper>
+        </Grid>
         <Grid item xs={3.5}></Grid>
       </Grid>
     </div>

@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid, Paper, Avatar, Typography, Box } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import WorkIcon from "@mui/icons-material/Work";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -82,9 +83,39 @@ const MainFeed = () => {
               </Box>
               <PersonAddIcon />
             </Box>
+            <hr></hr>
+            <Typography sx={{ padding: 3 }}>
+              The description will go here heheh
+            </Typography>
           </Paper>
         </Grid>
-        <Grid item xs={3.5}></Grid>
+        <Grid item xs={3.5}>
+          <Paper elevation={3} sx={{ mt: 5 }}>
+            <Typography sx={{ fontWeight: "bold", pt: 3, pl: 3, pb: 2 }}>
+              Friend List
+            </Typography>
+            <hr></hr>
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                padding: 3,
+                justifyContent: "space-between",
+              }}
+            >
+              <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+                <Avatar>RL</Avatar>
+                <Box>
+                  <Typography sx={{ fontWeight: "bold" }}>
+                    Robert Lin
+                  </Typography>
+                  <Typography>Vancouver, BC</Typography>
+                </Box>
+              </Box>
+              <PersonRemoveIcon />
+            </Box>
+          </Paper>
+        </Grid>
       </Grid>
     </div>
   );

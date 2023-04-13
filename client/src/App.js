@@ -13,6 +13,7 @@ import Welcome from "./pages/Welcome";
 
 function App() {
   const [modes, setModes] = useState("dark");
+  const [page, setPage] = useState("main");
 
   const darkTheme = createTheme({
     palette: {
@@ -35,7 +36,20 @@ function App() {
       {/* <AuthNavbar /> */}
       <MainNavbar toggleMode={toggleMode} />
       <Container maxWidth="xl">
-        {!localStorage.getItem("access token") ? <Welcome /> : <MainFeed />}
+        {!localStorage.getItem("access token") &&
+        (page === "main" || page === "new post") ? (
+          <Welcome />
+        ) : page === "main" ? (
+          <MainFeed />
+        ) : page === "login" ? (
+          <Login />
+        ) : page === "register" ? (
+          <Register />
+        ) : page === "new post" ? (
+          <NewPost />
+        ) : (
+          <Welcome />
+        )}
         {/* <Register /> */}
         {/* <Login /> */}
         {/* <MainFeed /> */}

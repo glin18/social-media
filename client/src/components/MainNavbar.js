@@ -54,7 +54,15 @@ const MainNavbar = ({ toggleMode }) => {
         >
           <AccountBoxIcon />
         </IconButton>
-        <Button color="inherit">Login</Button>
+        <Button
+          color="inherit"
+          onClick={() => {
+            localStorage.removeItem("access token");
+            location.reload();
+          }}
+        >
+          Logout
+        </Button>
       </Toolbar>
     </AppBar>
   );

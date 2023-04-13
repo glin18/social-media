@@ -32,9 +32,11 @@ function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-
-      {/* <AuthNavbar /> */}
-      <MainNavbar toggleMode={toggleMode} setPage={setPage} />
+      {!localStorage.getItem("access token") ? (
+        <AuthNavbar setPage={setPage} />
+      ) : (
+        <MainNavbar toggleMode={toggleMode} setPage={setPage} />
+      )}
       <Container maxWidth="xl">
         {!localStorage.getItem("access token") &&
         (page === "main" || page === "new post") ? (

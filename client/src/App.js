@@ -42,7 +42,7 @@ function App() {
         (page === "main" || page === "new post") ? (
           <Welcome setPage={setPage} />
         ) : page === "main" ? (
-          <MainFeed />
+          <MainFeed setPage={setPage} />
         ) : page === "login" ? (
           <Login setPage={setPage} />
         ) : page === "register" ? (

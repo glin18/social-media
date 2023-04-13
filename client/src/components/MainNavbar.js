@@ -33,6 +33,7 @@ const MainNavbar = ({ toggleMode, setPage }) => {
           color="inherit"
           aria-label="post"
           sx={{ mr: 2 }}
+          onClick={() => setPage("new post")}
         >
           <AddBoxIcon />
         </IconButton>

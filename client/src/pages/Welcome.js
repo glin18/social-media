@@ -18,7 +18,9 @@ const Welcome = ({ setPage }) => {
       </Typography>
       <hr></hr>
       <Box sx={{ display: "flex", gap: 3 }}>
-        <Button variant="outlined">Register</Button>
+        <Button variant="outlined" onClick={() => setPage("register")}>
+          Register
+        </Button>
         <Button variant="outlined" onClick={() => setPage("login")}>
           Login
         </Button>

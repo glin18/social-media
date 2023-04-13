@@ -6,18 +6,7 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { useTheme } from "@mui/material/styles";
 
-const MainNavbar = () => {
-  const theme = useTheme();
-
-  const toggleMode = () => {
-    if (theme.palette.mode === "dark") {
-      console.log("toggle");
-      theme.palette.mode = "light";
-    } else {
-      theme.palette.mode = "dark";
-    }
-  };
-
+const MainNavbar = ({ toggleMode }) => {
   return (
     <AppBar position="static">
       <Toolbar>

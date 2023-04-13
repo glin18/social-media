@@ -1,6 +1,8 @@
 import React from "react";
 import { Grid, Paper, Avatar, Typography, Box } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import WorkIcon from "@mui/icons-material/Work";
 
 const MainFeed = () => {
   return (
@@ -26,6 +28,23 @@ const MainFeed = () => {
               <PersonAddIcon />
             </Box>
             <hr></hr>
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                padding: 3,
+                gap: 2,
+              }}
+            >
+              <Box sx={{ display: "flex", gap: 2 }}>
+                <LocationOnIcon />
+                <Typography>Taipei, Taiwan</Typography>
+              </Box>
+              <Box sx={{ display: "flex", gap: 2 }}>
+                <WorkIcon />
+                <Typography>Software Developer, DMS</Typography>
+              </Box>
+            </Box>
           </Paper>
         </Grid>
         <Grid item xs={5}></Grid>

@@ -35,11 +35,12 @@ function App() {
       {/* <AuthNavbar /> */}
       <MainNavbar toggleMode={toggleMode} />
       <Container maxWidth="xl">
+        {!localStorage.getItem("access token") ? <Welcome /> : <MainFeed />}
         {/* <Register /> */}
         {/* <Login /> */}
         {/* <MainFeed /> */}
         {/* <NewPost /> */}
-        <Welcome />
+        {/* <Welcome /> */}
       </Container>
     </ThemeProvider>
   );

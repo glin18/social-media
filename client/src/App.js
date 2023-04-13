@@ -8,6 +8,8 @@ import MainFeed from "./pages/MainFeed";
 import { ThemeProvider, createTheme } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
 import { useState } from "react";
+import NewPost from "./pages/NewPost";
+import Welcome from "./pages/Welcome";
 
 function App() {
   const [modes, setModes] = useState("dark");
@@ -29,15 +31,16 @@ function App() {
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
-      <div className="App">
-        {/* <AuthNavbar /> */}
-        <MainNavbar toggleMode={toggleMode} />
-        <Container maxWidth="xl">
-          {/* <Register /> */}
-          {/* <Login /> */}
-          <MainFeed />
-        </Container>
-      </div>
+
+      {/* <AuthNavbar /> */}
+      <MainNavbar toggleMode={toggleMode} />
+      <Container maxWidth="xl">
+        {/* <Register /> */}
+        {/* <Login /> */}
+        {/* <MainFeed /> */}
+        {/* <NewPost /> */}
+        <Welcome />
+      </Container>
     </ThemeProvider>
   );
 }

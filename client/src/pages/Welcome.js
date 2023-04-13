@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField, Box, Typography, Button, Avatar } from "@mui/material";
 
-const Welcome = () => {
+const Welcome = ({ setPage }) => {
   return (
     <Box
       sx={{
@@ -19,7 +19,9 @@ const Welcome = () => {
       <hr></hr>
       <Box sx={{ display: "flex", gap: 3 }}>
         <Button variant="outlined">Register</Button>
-        <Button variant="outlined">Login</Button>
+        <Button variant="outlined" onClick={() => setPage("login")}>
+          Login
+        </Button>
       </Box>
     </Box>
   );

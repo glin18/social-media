@@ -34,11 +34,11 @@ function App() {
       <CssBaseline />
 
       {/* <AuthNavbar /> */}
-      <MainNavbar toggleMode={toggleMode} />
+      <MainNavbar toggleMode={toggleMode} setPage={setPage} />
       <Container maxWidth="xl">
         {!localStorage.getItem("access token") &&
         (page === "main" || page === "new post") ? (
-          <Welcome />
+          <Welcome setPage={setPage} />
         ) : page === "main" ? (
           <MainFeed />
         ) : page === "login" ? (
@@ -48,7 +48,7 @@ function App() {
         ) : page === "new post" ? (
           <NewPost />
         ) : (
-          <Welcome />
+          <Welcome setPage={setPage} />
         )}
         {/* <Register /> */}
         {/* <Login /> */}

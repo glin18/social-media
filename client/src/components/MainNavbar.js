@@ -6,7 +6,7 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import AccountBoxIcon from "@mui/icons-material/AccountBox";
 import { useTheme } from "@mui/material/styles";
 
-const MainNavbar = ({ toggleMode }) => {
+const MainNavbar = ({ toggleMode, setPage }) => {
   return (
     <AppBar position="static">
       <Toolbar>
@@ -22,7 +22,8 @@ const MainNavbar = ({ toggleMode }) => {
         <Typography
           variant="h6"
           component="div"
-          sx={{ flexGrow: 1, fontWeight: "bold" }}
+          sx={{ flexGrow: 1, fontWeight: "bold", cursor: "pointer" }}
+          onClick={() => setPage("menu")}
         >
           Social Media
         </Typography>
@@ -58,7 +59,7 @@ const MainNavbar = ({ toggleMode }) => {
           color="inherit"
           onClick={() => {
             localStorage.removeItem("access token");
-            location.reload();
+            window.location.reload();
           }}
         >
           Logout

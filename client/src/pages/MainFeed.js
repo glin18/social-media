@@ -9,7 +9,7 @@ const MainFeed = () => {
     <div>
       <Grid container spacing={2}>
         <Grid item xs={3.5}>
-          <Paper elevation={3} sx={{ mt: 5, height: 300 }}>
+          <Paper elevation={3} sx={{ mt: 5, height: 600 }}>
             <Box
               sx={{
                 display: "flex",
@@ -45,6 +45,18 @@ const MainFeed = () => {
                 <Typography>Software Developer, DMS</Typography>
               </Box>
             </Box>
+            <hr></hr>
+            <Box sx={{ padding: 3 }}>
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                <Typography>Profile Views</Typography>
+                <Typography>6969</Typography>
+              </Box>
+              <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+                <Typography>Post Likes</Typography>
+                <Typography>69</Typography>
+              </Box>
+            </Box>
+            <hr></hr>
           </Paper>
         </Grid>
         <Grid item xs={5}></Grid>

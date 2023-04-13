@@ -46,7 +46,7 @@ function App() {
         ) : page === "login" ? (
           <Login setPage={setPage} />
         ) : page === "register" ? (
-          <Register />
+          <Register setPage={setPage} />
         ) : page === "new post" ? (
           <NewPost />
         ) : (

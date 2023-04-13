@@ -3,7 +3,7 @@ import { TextField, Box, Typography, Button, Avatar } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import axios from "axios";
 
-const Register = () => {
+const Register = ({ setPage }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -22,6 +22,7 @@ const Register = () => {
       })
       .then((res) => {
         console.log(res);
+        setPage("main");
       })
       .catch((err) => {
         console.log(err);

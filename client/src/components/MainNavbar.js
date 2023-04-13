@@ -23,7 +23,7 @@ const MainNavbar = ({ toggleMode, setPage }) => {
           variant="h6"
           component="div"
           sx={{ flexGrow: 1, fontWeight: "bold", cursor: "pointer" }}
-          onClick={() => setPage("menu")}
+          onClick={() => setPage("main")}
         >
           Social Media
         </Typography>

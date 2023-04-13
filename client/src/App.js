@@ -3,6 +3,7 @@ import Register from "./pages/Register";
 import Login from "./pages/Login";
 import Container from "@mui/material/Container";
 import AuthNavbar from "./components/AuthNavbar";
+import MainFeed from "./pages/MainFeed";
 
 function App() {
   return (
@@ -10,7 +11,8 @@ function App() {
       <AuthNavbar />
       <Container maxWidth="xl">
         {/* <Register /> */}
-        <Login />
+        {/* <Login /> */}
+        <MainFeed />
       </Container>
     </div>
   );

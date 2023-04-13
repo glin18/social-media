@@ -18,6 +18,7 @@ const Login = () => {
       })
       .then((res) => {
         console.log(res);
+        localStorage.setItem("access token", res.data.token);
       })
       .catch((err) => {
         console.log(err);

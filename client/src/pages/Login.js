@@ -3,7 +3,7 @@ import { TextField, Box, Typography, Button, Avatar } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import axios from "axios";
 
-const Login = () => {
+const Login = ({ setPage }) => {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -19,6 +19,7 @@ const Login = () => {
       .then((res) => {
         console.log(res);
         localStorage.setItem("access token", res.data.token);
+        setPage("main");
       })
       .catch((err) => {
         console.log(err);

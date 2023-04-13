@@ -44,7 +44,7 @@ function App() {
         ) : page === "main" ? (
           <MainFeed />
         ) : page === "login" ? (
-          <Login />
+          <Login setPage={setPage} />
         ) : page === "register" ? (
           <Register />
         ) : page === "new post" ? (
@@ -52,11 +52,6 @@ function App() {
         ) : (
           <Welcome setPage={setPage} />
         )}
-        {/* <Register /> */}
-        {/* <Login /> */}
-        {/* <MainFeed /> */}
-        {/* <NewPost /> */}
-        {/* <Welcome /> */}
       </Container>
     </ThemeProvider>
   );

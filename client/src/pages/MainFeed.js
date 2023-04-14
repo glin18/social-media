@@ -1,5 +1,12 @@
 import React from "react";
-import { Grid, Paper, Avatar, Typography, Box } from "@mui/material";
+import {
+  Grid,
+  Paper,
+  Avatar,
+  Typography,
+  Box,
+  IconButton,
+} from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
@@ -27,7 +34,9 @@ const MainFeed = () => {
                   <Typography>3 Friends</Typography>
                 </Box>
               </Box>
-              <SettingsIcon />
+              <IconButton>
+                <SettingsIcon />
+              </IconButton>
             </Box>
             <hr></hr>
             <Box
@@ -81,7 +90,9 @@ const MainFeed = () => {
                   <Typography>Vancouver, BC</Typography>
                 </Box>
               </Box>
-              <PersonAddIcon />
+              <IconButton>
+                <PersonAddIcon />
+              </IconButton>
             </Box>
             <hr></hr>
             <Typography sx={{ padding: 3 }}>
@@ -112,7 +123,9 @@ const MainFeed = () => {
                   <Typography>Vancouver, BC</Typography>
                 </Box>
               </Box>
-              <PersonRemoveIcon />
+              <IconButton>
+                <PersonRemoveIcon />
+              </IconButton>
             </Box>
           </Paper>
         </Grid>

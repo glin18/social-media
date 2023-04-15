@@ -162,7 +162,23 @@ const MainFeed = () => {
                   </Box>
                 </Box>
                 {query.data._id !== userPost.userId && (
-                  <IconButton>
+                  <IconButton
+                    onClick={() => {
+                      const accessToken = localStorage.getItem("access token");
+                      const decoded = jwt_decode(accessToken);
+                      const id = decoded.id;
+                      const config = {
+                        headers: { Authorization: `Bearer ${accessToken}` },
+                      };
+                      axios
+                        .get(
+                          `http://localhost:3001/user/${id}/${userPost.userId}`,
+                          config
+                        )
+                        .then((res) => console.log(res.data))
+                        .catch((err) => console.log(err));
+                    }}
+                  >
                     <PersonAddIcon />
                   </IconButton>
                 )}

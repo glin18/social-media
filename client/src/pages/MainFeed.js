@@ -61,10 +61,16 @@ const MainFeed = () => {
               }}
             >
               <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-                <Avatar>GL</Avatar>
+                <Avatar>
+                  {query.data.firstName[0].toUpperCase()}
+                  {query.data.lastName[0].toUpperCase()}
+                </Avatar>
                 <Box sx={{ mr: 5 }}>
                   <Typography sx={{ fontWeight: "bold" }}>
-                    {query.data.firstName} {query.data.lastName}
+                    {query.data.firstName.charAt(0).toUpperCase() +
+                      query.data.firstName.slice(1)}{" "}
+                    {query.data.lastName.charAt(0) +
+                      query.data.lastName.slice(1)}
                   </Typography>
                   <Typography>{query.data.friends.length} Friends</Typography>
                 </Box>

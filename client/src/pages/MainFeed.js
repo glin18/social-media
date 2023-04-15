@@ -39,11 +39,33 @@ const MainFeed = () => {
     },
   });
 
-  if (query.isLoading) {
+  const postsQuery = useQuery({
+    queryKey: ["posts"],
+    queryFn: () => {
+      const accessToken = localStorage.getItem("access token");
+      const decoded = jwt_decode(accessToken);
+      console.log(decoded);
+      const id = decoded.id;
+      const config = {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      };
+      return axios
+        .get(`http://localhost:3001/post/`, config)
+        .then((res) => {
+          console.log(res.data);
+          return res.data;
+        })
+        .catch((err) => {
+          console.log(JSON.stringify(err));
+        });
+    },
+  });
+
+  if (query.isLoading || postsQuery.isLoading) {
     return <span>Loading...</span>;
   }
 
-  if (query.isError) {
+  if (query.isError || postsQuery.isError) {
     return <span>An Error Occurred. Please try again</span>;
   }
 
@@ -112,34 +134,39 @@ const MainFeed = () => {
           </Paper>
         </Grid>
         <Grid item xs={5}>
-          <Paper elevation={3} sx={{ mt: 5, height: 600 }}>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                padding: 3,
-                gap: 2,
-                justifyContent: "space-between",
-              }}
-            >
-              <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-                <Avatar>RL</Avatar>
-                <Box>
-                  <Typography sx={{ fontWeight: "bold" }}>
-                    Robert Lin
-                  </Typography>
-                  <Typography>Vancouver, BC</Typography>
+          {postsQuery.data.map((userPost) => (
+            <Paper elevation={3} sx={{ mt: 5, height: 600 }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  padding: 3,
+                  gap: 2,
+                  justifyContent: "space-between",
+                }}
+              >
+                <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+                  <Avatar>
+                    {userPost.firstName[0].toUpperCase()}
+                    {userPost.lastName[0].toUpperCase()}
+                  </Avatar>
+                  <Box>
+                    <Typography sx={{ fontWeight: "bold" }}>
+                      {userPost.firstName.charAt(0).toUpperCase() +
+                        userPost.firstName.slice(1)}{" "}
+                      {userPost.lastName.charAt(0).toUpperCase() +
+                        userPost.lastName.slice(1)}
+                    </Typography>
+                    <Typography>{userPost.location}</Typography>
+                  </Box>
                 </Box>
               </Box>
-              <IconButton>
-                <PersonAddIcon />
-              </IconButton>
-            </Box>
-            <hr></hr>
-            <Typography sx={{ padding: 3 }}>
-              The description will go here heheh
-            </Typography>
-          </Paper>
+              <hr></hr>
+              <Typography sx={{ padding: 3 }}>
+                {userPost.description}
+              </Typography>
+            </Paper>
+          ))}
         </Grid>
         <Grid item xs={3.5}>
           <Paper elevation={3} sx={{ mt: 5 }}>

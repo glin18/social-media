@@ -6,6 +6,7 @@ import {
   Typography,
   Box,
   IconButton,
+  Icon,
 } from "@mui/material";
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
@@ -160,6 +161,9 @@ const MainFeed = () => {
                     <Typography>{userPost.location}</Typography>
                   </Box>
                 </Box>
+                <IconButton>
+                  <PersonAddIcon />
+                </IconButton>
               </Box>
               <hr></hr>
               <Typography sx={{ padding: 3 }}>

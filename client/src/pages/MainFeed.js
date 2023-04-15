@@ -12,8 +12,38 @@ import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import WorkIcon from "@mui/icons-material/Work";
 import SettingsIcon from "@mui/icons-material/Settings";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 const MainFeed = () => {
+  const query = useQuery({
+    queryKey: ["user"],
+    queryFn: () => {
+      const accessToken = localStorage.getItem("access token");
+      const decoded = jwt_decode(accessToken);
+      console.log(decoded);
+      const id = decoded.id;
+      const config = {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      };
+      return axios
+        .get(`http://localhost:3001/user/${id}`, config)
+        .then((res) => res.data)
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  });
+
+  if (query.isLoading) {
+    return <span>Loading...</span>;
+  }
+
+  if (query.isError) {
+    return <span>Error: {JSON.stringify(query.error)}</span>;
+  }
+
   return (
     <div>
       <Grid container spacing={5}>
@@ -30,7 +60,9 @@ const MainFeed = () => {
               <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
                 <Avatar>GL</Avatar>
                 <Box sx={{ mr: 5 }}>
-                  <Typography sx={{ fontWeight: "bold" }}>Gary Lin</Typography>
+                  <Typography sx={{ fontWeight: "bold" }}>
+                    {query.data.firstName}
+                  </Typography>
                   <Typography>3 Friends</Typography>
                 </Box>
               </Box>

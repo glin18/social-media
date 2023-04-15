@@ -52,7 +52,7 @@ function App() {
           ) : page === "register" ? (
             <Register setPage={setPage} />
           ) : page === "new post" ? (
-            <NewPost />
+            <NewPost setPage={setPage} />
           ) : (
             <Welcome setPage={setPage} />
           )}

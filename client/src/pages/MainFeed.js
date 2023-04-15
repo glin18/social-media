@@ -29,9 +29,12 @@ const MainFeed = () => {
       };
       return axios
         .get(`http://localhost:3001/user/${id}`, config)
-        .then((res) => res.data)
+        .then((res) => {
+          console.log(res.data);
+          return res.data;
+        })
         .catch((err) => {
-          console.log(err);
+          console.log(JSON.stringify(err));
         });
     },
   });
@@ -41,7 +44,7 @@ const MainFeed = () => {
   }
 
   if (query.isError) {
-    return <span>Error: {JSON.stringify(query.error)}</span>;
+    return <span>An Error Occurred. Please try again</span>;
   }
 
   return (
@@ -61,9 +64,9 @@ const MainFeed = () => {
                 <Avatar>GL</Avatar>
                 <Box sx={{ mr: 5 }}>
                   <Typography sx={{ fontWeight: "bold" }}>
-                    {query.data.firstName}
+                    {query.data.firstName} {query.data.lastName}
                   </Typography>
-                  <Typography>3 Friends</Typography>
+                  <Typography>{query.data.friends.length} Friends</Typography>
                 </Box>
               </Box>
               <IconButton>
@@ -92,7 +95,7 @@ const MainFeed = () => {
             <Box sx={{ padding: 3 }}>
               <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Typography>Profile Views</Typography>
-                <Typography>6969</Typography>
+                <Typography>{query.data.viewedProfile}</Typography>
               </Box>
               <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Typography>Post Likes</Typography>

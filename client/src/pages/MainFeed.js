@@ -64,11 +64,33 @@ const MainFeed = () => {
     },
   });
 
-  if (query.isLoading || postsQuery.isLoading) {
+  const friendsQuery = useQuery({
+    queryKey: ["friends"],
+    queryFn: () => {
+      const accessToken = localStorage.getItem("access token");
+      const decoded = jwt_decode(accessToken);
+      console.log(decoded);
+      const id = decoded.id;
+      const config = {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      };
+      return axios
+        .get(`http://localhost:3001/user/${id}/friends`, config)
+        .then((res) => {
+          console.log(res.data);
+          return res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  });
+
+  if (query.isLoading || postsQuery.isLoading || friendsQuery.isLoading) {
     return <span>Loading...</span>;
   }
 
-  if (query.isError || postsQuery.isError) {
+  if (query.isError || postsQuery.isError || friendsQuery.isError) {
     return <span>An Error Occurred. Please try again</span>;
   }
 

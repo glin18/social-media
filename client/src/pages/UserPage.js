@@ -94,7 +94,7 @@ const UserPage = () => {
                     {query.data.lastName.charAt(0) +
                       query.data.lastName.slice(1)}
                   </Typography>
-                  <Typography>3 Friends</Typography>
+                  <Typography>{query.data.friends.length} Friends</Typography>
                 </Box>
               </Box>
               <IconButton>
@@ -112,18 +112,22 @@ const UserPage = () => {
             >
               <Box sx={{ display: "flex", gap: 2 }}>
                 <LocationOnIcon />
-                <Typography>Taipei, Taiwan</Typography>
+                <Typography>
+                  {query.data.location || "Location Not Set"}
+                </Typography>
               </Box>
               <Box sx={{ display: "flex", gap: 2 }}>
                 <WorkIcon />
-                <Typography>Software Developer, DMS</Typography>
+                <Typography>
+                  {query.data.occupation || "Occupation Not Set"}
+                </Typography>
               </Box>
             </Box>
             <hr></hr>
             <Box sx={{ padding: 3 }}>
               <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Typography>Profile Views</Typography>
-                <Typography>6969</Typography>
+                <Typography>{query.data.viewedProfile}</Typography>
               </Box>
               <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Typography>Post Likes</Typography>
@@ -187,9 +191,6 @@ const UserPage = () => {
                     <Typography>{userPost.location}</Typography>
                   </Box>
                 </Box>
-                <IconButton>
-                  <PersonAddIcon />
-                </IconButton>
               </Box>
               <hr></hr>
               <Typography sx={{ padding: 3 }}>

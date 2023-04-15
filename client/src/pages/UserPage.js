@@ -39,11 +39,33 @@ const UserPage = () => {
     },
   });
 
-  if (userPostsQuery.isLoading) {
+  const query = useQuery({
+    queryKey: ["user"],
+    queryFn: () => {
+      const accessToken = localStorage.getItem("access token");
+      const decoded = jwt_decode(accessToken);
+      console.log(decoded);
+      const id = decoded.id;
+      const config = {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      };
+      return axios
+        .get(`http://localhost:3001/user/${id}`, config)
+        .then((res) => {
+          console.log(res.data);
+          return res.data;
+        })
+        .catch((err) => {
+          console.log(JSON.stringify(err));
+        });
+    },
+  });
+
+  if (userPostsQuery.isLoading || query.isLoading) {
     return <span>Loading...</span>;
   }
 
-  if (userPostsQuery.isError) {
+  if (userPostsQuery.isError || query.isLoading) {
     return <span>An Error Occurred. Please try again</span>;
   }
 
@@ -61,9 +83,17 @@ const UserPage = () => {
               }}
             >
               <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-                <Avatar>GL</Avatar>
+                <Avatar>
+                  {query.data.firstName[0].toUpperCase()}
+                  {query.data.lastName[0].toUpperCase()}
+                </Avatar>
                 <Box sx={{ mr: 5 }}>
-                  <Typography sx={{ fontWeight: "bold" }}>Gary Lin</Typography>
+                  <Typography sx={{ fontWeight: "bold" }}>
+                    {query.data.firstName.charAt(0).toUpperCase() +
+                      query.data.firstName.slice(1)}{" "}
+                    {query.data.lastName.charAt(0) +
+                      query.data.lastName.slice(1)}
+                  </Typography>
                   <Typography>3 Friends</Typography>
                 </Box>
               </Box>

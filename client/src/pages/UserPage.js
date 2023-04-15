@@ -131,34 +131,42 @@ const UserPage = () => {
           </Paper>
         </Grid>
         <Grid item xs={7}>
-          <Paper elevation={3} sx={{ mt: 5, height: 600 }}>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                padding: 3,
-                gap: 2,
-                justifyContent: "space-between",
-              }}
-            >
-              <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-                <Avatar>RL</Avatar>
-                <Box>
-                  <Typography sx={{ fontWeight: "bold" }}>
-                    Robert Lin
-                  </Typography>
-                  <Typography>Vancouver, BC</Typography>
+          {userPostsQuery.data.map((userPost) => (
+            <Paper elevation={3} sx={{ mt: 5, height: 600 }}>
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  padding: 3,
+                  gap: 2,
+                  justifyContent: "space-between",
+                }}
+              >
+                <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+                  <Avatar>
+                    {userPost.firstName[0].toUpperCase()}
+                    {userPost.lastName[0].toUpperCase()}
+                  </Avatar>
+                  <Box>
+                    <Typography sx={{ fontWeight: "bold" }}>
+                      {userPost.firstName.charAt(0).toUpperCase() +
+                        userPost.firstName.slice(1)}{" "}
+                      {userPost.lastName.charAt(0).toUpperCase() +
+                        userPost.lastName.slice(1)}
+                    </Typography>
+                    <Typography>{userPost.location}</Typography>
+                  </Box>
                 </Box>
+                <IconButton>
+                  <PersonAddIcon />
+                </IconButton>
               </Box>
-              <IconButton>
-                <PersonAddIcon />
-              </IconButton>
-            </Box>
-            <hr></hr>
-            <Typography sx={{ padding: 3 }}>
-              The description will go here heheh
-            </Typography>
-          </Paper>
+              <hr></hr>
+              <Typography sx={{ padding: 3 }}>
+                {userPost.description}
+              </Typography>
+            </Paper>
+          ))}
         </Grid>
       </Grid>
     </div>

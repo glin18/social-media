@@ -10,6 +10,7 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { useState } from "react";
 import NewPost from "./pages/NewPost";
 import Welcome from "./pages/Welcome";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 function App() {
   const [modes, setModes] = useState("dark");
@@ -29,31 +30,35 @@ function App() {
     }
   };
 
+  const queryClient = new QueryClient();
+
   return (
-    <ThemeProvider theme={darkTheme}>
-      <CssBaseline />
-      {!localStorage.getItem("access token") ? (
-        <AuthNavbar setPage={setPage} />
-      ) : (
-        <MainNavbar toggleMode={toggleMode} setPage={setPage} />
-      )}
-      <Container maxWidth="xl">
-        {!localStorage.getItem("access token") &&
-        (page === "main" || page === "new post") ? (
-          <Welcome setPage={setPage} />
-        ) : page === "main" ? (
-          <MainFeed setPage={setPage} />
-        ) : page === "login" ? (
-          <Login setPage={setPage} />
-        ) : page === "register" ? (
-          <Register setPage={setPage} />
-        ) : page === "new post" ? (
-          <NewPost />
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
+        {!localStorage.getItem("access token") ? (
+          <AuthNavbar setPage={setPage} />
         ) : (
-          <Welcome setPage={setPage} />
+          <MainNavbar toggleMode={toggleMode} setPage={setPage} />
         )}
-      </Container>
-    </ThemeProvider>
+        <Container maxWidth="xl">
+          {!localStorage.getItem("access token") &&
+          (page === "main" || page === "new post") ? (
+            <Welcome setPage={setPage} />
+          ) : page === "main" ? (
+            <MainFeed setPage={setPage} />
+          ) : page === "login" ? (
+            <Login setPage={setPage} />
+          ) : page === "register" ? (
+            <Register setPage={setPage} />
+          ) : page === "new post" ? (
+            <NewPost />
+          ) : (
+            <Welcome setPage={setPage} />
+          )}
+        </Container>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }
 

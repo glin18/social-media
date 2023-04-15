@@ -17,6 +17,8 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 
 const UserPage = () => {
+  const queryClient = useQueryClient();
+
   const userPostsQuery = useQuery({
     queryKey: ["userPosts"],
     queryFn: () => {
@@ -61,11 +63,33 @@ const UserPage = () => {
     },
   });
 
-  if (userPostsQuery.isLoading || query.isLoading) {
+  const friendsQuery = useQuery({
+    queryKey: ["friends"],
+    queryFn: () => {
+      const accessToken = localStorage.getItem("access token");
+      const decoded = jwt_decode(accessToken);
+      console.log(decoded);
+      const id = decoded.id;
+      const config = {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      };
+      return axios
+        .get(`http://localhost:3001/user/${id}/friends`, config)
+        .then((res) => {
+          console.log(res.data);
+          return res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+  });
+
+  if (userPostsQuery.isLoading || query.isLoading || friendsQuery.isLoading) {
     return <span>Loading...</span>;
   }
 
-  if (userPostsQuery.isError || query.isLoading) {
+  if (userPostsQuery.isError || query.isError || friendsQuery.isError) {
     return <span>An Error Occurred. Please try again</span>;
   }
 
@@ -141,27 +165,67 @@ const UserPage = () => {
               Friend List
             </Typography>
             <hr></hr>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                padding: 3,
-                justifyContent: "space-between",
-              }}
-            >
-              <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-                <Avatar>RL</Avatar>
-                <Box>
-                  <Typography sx={{ fontWeight: "bold" }}>
-                    Robert Lin
-                  </Typography>
-                  <Typography>Vancouver, BC</Typography>
-                </Box>
+            {friendsQuery.data.length === 0 && (
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  padding: 3,
+                  justifyContent: "space-between",
+                }}
+              >
+                <Typography>No Friends</Typography>
               </Box>
-              <IconButton>
-                <PersonRemoveIcon />
-              </IconButton>
-            </Box>
+            )}
+            {friendsQuery.data.map((friend) => (
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  padding: 3,
+                  justifyContent: "space-between",
+                }}
+              >
+                <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+                  <Avatar>
+                    {friend.firstName[0].toUpperCase()}
+                    {friend.lastName[0].toUpperCase()}
+                  </Avatar>
+                  <Box>
+                    <Typography sx={{ fontWeight: "bold" }}>
+                      {friend.firstName.charAt(0).toUpperCase() +
+                        friend.firstName.slice(1)}{" "}
+                      {friend.lastName.charAt(0).toUpperCase() +
+                        friend.lastName.slice(1)}
+                    </Typography>
+                    <Typography>Vancouver, BC</Typography>
+                  </Box>
+                </Box>
+                <IconButton
+                  onClick={() => {
+                    const accessToken = localStorage.getItem("access token");
+                    const decoded = jwt_decode(accessToken);
+                    const id = decoded.id;
+                    const config = {
+                      headers: { Authorization: `Bearer ${accessToken}` },
+                    };
+                    axios
+                      .get(
+                        `http://localhost:3001/user/${id}/${friend._id}`,
+                        config
+                      )
+                      .then((res) => {
+                        console.log(res.data);
+                        queryClient.invalidateQueries(["user"]);
+                        queryClient.invalidateQueries(["friends"]);
+                      })
+                      .catch((err) => console.log(err));
+                  }}
+                >
+                  <PersonRemoveIcon />
+                </IconButton>
+              </Box>
+            ))}
           </Paper>
         </Grid>
         <Grid item xs={7}>

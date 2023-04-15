@@ -116,7 +116,7 @@ const MainFeed = () => {
                   <Typography sx={{ fontWeight: "bold" }}>
                     {query.data.firstName.charAt(0).toUpperCase() +
                       query.data.firstName.slice(1)}{" "}
-                    {query.data.lastName.charAt(0) +
+                    {query.data.lastName.charAt(0).toUpperCase() +
                       query.data.lastName.slice(1)}
                   </Typography>
                   <Typography>{query.data.friends.length} Friends</Typography>
@@ -238,7 +238,7 @@ const MainFeed = () => {
               >
                 <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
                   <Avatar>
-                    {friend.firstName[0].toUpperCase()}{" "}
+                    {friend.firstName[0].toUpperCase()}
                     {friend.lastName[0].toUpperCase()}
                   </Avatar>
                   <Box>

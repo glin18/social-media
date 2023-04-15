@@ -18,6 +18,8 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 
 const MainFeed = () => {
+  const queryClient = useQueryClient();
+
   const query = useQuery({
     queryKey: ["user"],
     queryFn: () => {
@@ -175,11 +177,18 @@ const MainFeed = () => {
                           `http://localhost:3001/user/${id}/${userPost.userId}`,
                           config
                         )
-                        .then((res) => console.log(res.data))
+                        .then((res) => {
+                          console.log(res.data);
+                          queryClient.invalidateQueries(["user"]);
+                        })
                         .catch((err) => console.log(err));
                     }}
                   >
-                    <PersonAddIcon />
+                    {query.data.friends.includes(userPost.userId) ? (
+                      <PersonRemoveIcon />
+                    ) : (
+                      <PersonAddIcon />
+                    )}
                   </IconButton>
                 )}
               </Box>

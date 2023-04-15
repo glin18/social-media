@@ -12,8 +12,41 @@ import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import WorkIcon from "@mui/icons-material/Work";
 import SettingsIcon from "@mui/icons-material/Settings";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
 
 const UserPage = () => {
+  const userPostsQuery = useQuery({
+    queryKey: ["userPosts"],
+    queryFn: () => {
+      const accessToken = localStorage.getItem("access token");
+      const decoded = jwt_decode(accessToken);
+      console.log(decoded);
+      const id = decoded.id;
+      const config = {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      };
+      return axios
+        .get(`http://localhost:3001/post/${id}/posts`, config)
+        .then((res) => {
+          console.log(res.data);
+          return res.data;
+        })
+        .catch((err) => {
+          console.log(JSON.stringify(err));
+        });
+    },
+  });
+
+  if (userPostsQuery.isLoading) {
+    return <span>Loading...</span>;
+  }
+
+  if (userPostsQuery.isError) {
+    return <span>An Error Occurred. Please try again</span>;
+  }
+
   return (
     <div>
       <Grid container spacing={5}>

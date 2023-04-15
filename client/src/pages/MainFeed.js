@@ -161,9 +161,11 @@ const MainFeed = () => {
                     <Typography>{userPost.location}</Typography>
                   </Box>
                 </Box>
-                <IconButton>
-                  <PersonAddIcon />
-                </IconButton>
+                {query.data._id !== userPost.userId && (
+                  <IconButton>
+                    <PersonAddIcon />
+                  </IconButton>
+                )}
               </Box>
               <hr></hr>
               <Typography sx={{ padding: 3 }}>

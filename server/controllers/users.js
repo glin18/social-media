@@ -37,7 +37,7 @@ export const addRemoveFriend = async (req, res) => {
     if (user?.friends && user?.friends.includes(friendId)) {
       console.log("We in here");
       user.friends = user.friends.filter((Id) => Id !== friendId);
-      friend.friends = friend.friends.filter((Id) => Id !== user._id);
+      friend.friends = friend.friends.filter((Id) => Id !== id);
     } else {
       console.log(friendId, id);
       user.friends.push(friendId);

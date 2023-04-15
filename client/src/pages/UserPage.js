@@ -229,6 +229,9 @@ const UserPage = () => {
           </Paper>
         </Grid>
         <Grid item xs={7}>
+          {userPostsQuery.data.length === 0 && (
+            <Typography sx={{ mt: 5 }}>You currently have no posts</Typography>
+          )}
           {userPostsQuery.data.map((userPost) => (
             <Paper elevation={3} sx={{ mt: 5, height: 600 }}>
               <Box

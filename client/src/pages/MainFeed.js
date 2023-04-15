@@ -202,6 +202,7 @@ const MainFeed = () => {
                         .then((res) => {
                           console.log(res.data);
                           queryClient.invalidateQueries(["user"]);
+                          queryClient.invalidateQueries(["friends"]);
                         })
                         .catch((err) => console.log(err));
                     }}
@@ -227,6 +228,18 @@ const MainFeed = () => {
               Friend List
             </Typography>
             <hr></hr>
+            {friendsQuery.data.length === 0 && (
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  padding: 3,
+                  justifyContent: "space-between",
+                }}
+              >
+                <Typography>No Friends</Typography>
+              </Box>
+            )}
             {friendsQuery.data.map((friend) => (
               <Box
                 sx={{
@@ -251,7 +264,27 @@ const MainFeed = () => {
                     <Typography>Vancouver, BC</Typography>
                   </Box>
                 </Box>
-                <IconButton>
+                <IconButton
+                  onClick={() => {
+                    const accessToken = localStorage.getItem("access token");
+                    const decoded = jwt_decode(accessToken);
+                    const id = decoded.id;
+                    const config = {
+                      headers: { Authorization: `Bearer ${accessToken}` },
+                    };
+                    axios
+                      .get(
+                        `http://localhost:3001/user/${id}/${friend._id}`,
+                        config
+                      )
+                      .then((res) => {
+                        console.log(res.data);
+                        queryClient.invalidateQueries(["user"]);
+                        queryClient.invalidateQueries(["friends"]);
+                      })
+                      .catch((err) => console.log(err));
+                  }}
+                >
                   <PersonRemoveIcon />
                 </IconButton>
               </Box>

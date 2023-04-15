@@ -53,6 +53,7 @@ const MainNavbar = ({ toggleMode, setPage }) => {
           color="inherit"
           aria-label="account"
           sx={{ mr: 2 }}
+          onClick={() => setPage("user page")}
         >
           <AccountBoxIcon />
         </IconButton>

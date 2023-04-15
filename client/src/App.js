@@ -11,6 +11,7 @@ import { useState } from "react";
 import NewPost from "./pages/NewPost";
 import Welcome from "./pages/Welcome";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import UserPage from "./pages/UserPage";
 
 function App() {
   const [modes, setModes] = useState("dark");
@@ -53,6 +54,8 @@ function App() {
             <Register setPage={setPage} />
           ) : page === "new post" ? (
             <NewPost setPage={setPage} />
+          ) : page === "user page" ? (
+            <UserPage />
           ) : (
             <Welcome setPage={setPage} />
           )}

@@ -227,27 +227,35 @@ const MainFeed = () => {
               Friend List
             </Typography>
             <hr></hr>
-            <Box
-              sx={{
-                display: "flex",
-                alignItems: "center",
-                padding: 3,
-                justifyContent: "space-between",
-              }}
-            >
-              <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-                <Avatar>RL</Avatar>
-                <Box>
-                  <Typography sx={{ fontWeight: "bold" }}>
-                    Robert Lin
-                  </Typography>
-                  <Typography>Vancouver, BC</Typography>
+            {friendsQuery.data.map((friend) => (
+              <Box
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  padding: 3,
+                  justifyContent: "space-between",
+                }}
+              >
+                <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
+                  <Avatar>
+                    {friend.firstName[0].toUpperCase()}{" "}
+                    {friend.lastName[0].toUpperCase()}
+                  </Avatar>
+                  <Box>
+                    <Typography sx={{ fontWeight: "bold" }}>
+                      {friend.firstName.charAt(0).toUpperCase() +
+                        friend.firstName.slice(1)}{" "}
+                      {friend.lastName.charAt(0).toUpperCase() +
+                        friend.lastName.slice(1)}
+                    </Typography>
+                    <Typography>Vancouver, BC</Typography>
+                  </Box>
                 </Box>
+                <IconButton>
+                  <PersonRemoveIcon />
+                </IconButton>
               </Box>
-              <IconButton>
-                <PersonRemoveIcon />
-              </IconButton>
-            </Box>
+            ))}
           </Paper>
         </Grid>
       </Grid>

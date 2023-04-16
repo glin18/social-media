@@ -231,7 +231,10 @@ const MainFeed = () => {
                 >
                   <img
                     src={userPost.picturePath}
-                    style={{ height: "70%", width: "100%" }}
+                    style={{
+                      height: "360px",
+                      width: "100%",
+                    }}
                   ></img>
                 </Box>
               )}

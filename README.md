@@ -7,3 +7,4 @@ Been enjoying working on this social media web application
 - Node
 - Express
 - MongoDB
+- Cloudinary

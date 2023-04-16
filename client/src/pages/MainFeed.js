@@ -219,6 +219,22 @@ const MainFeed = () => {
               <Typography sx={{ padding: 3 }}>
                 {userPost.description}
               </Typography>
+
+              {userPost.picturePath && (
+                <Box
+                  sx={{
+                    padding: 3,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                  }}
+                >
+                  <img
+                    src={userPost.picturePath}
+                    style={{ height: "70%", width: "100%" }}
+                  ></img>
+                </Box>
+              )}
             </Paper>
           ))}
         </Grid>

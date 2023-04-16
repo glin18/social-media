@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { TextField, Box, Typography, Button, Avatar } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import axios from "axios";
@@ -6,9 +6,29 @@ import AddBoxIcon from "@mui/icons-material/AddBox";
 import jwt_decode from "jwt-decode";
 
 const NewPost = ({ setPage }) => {
-  const handleSubmit = (event) => {
+  const [imageSrc, setImageSrc] = useState();
+  const [uploadData, setUploadData] = useState();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
+    // console.log(event.currentTarget);
     const data = new FormData(event.currentTarget);
+    const form = event.currentTarget;
+    const fileInput = Array.from(form.elements).find(
+      ({ name }) => name === "file"
+    );
+    // console.log(data.get("file"));
+    const cloudinaryData = new FormData();
+    for (const file of fileInput.files) {
+      cloudinaryData.append("file", file);
+    }
+    cloudinaryData.append("upload_preset", "crjkt4sn");
+    const cloudinaryResponse = await axios.post(
+      "https://api.cloudinary.com/v1_1/deabe2phl/image/upload",
+      cloudinaryData
+    );
+    const secure_url = cloudinaryResponse.data.secure_url;
+    console.log(secure_url);
     const accessToken = localStorage.getItem("access token");
     const decoded = jwt_decode(accessToken);
     console.log(decoded);
@@ -20,6 +40,7 @@ const NewPost = ({ setPage }) => {
       userId: id,
       description: data.get("description"),
       location: data.get("location"),
+      picturePath: secure_url,
     };
     console.log(params);
 
@@ -65,6 +86,7 @@ const NewPost = ({ setPage }) => {
           required
           sx={{ maxWidth: 400, width: "100%" }}
         />
+        <input type="file" name="file"></input>
         <Button variant="contained" sx={{ mb: 3 }} type="submit">
           Submit
         </Button>

@@ -15,6 +15,7 @@ import SettingsIcon from "@mui/icons-material/Settings";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 const UserPage = () => {
   const queryClient = useQueryClient();
@@ -258,6 +259,9 @@ const UserPage = () => {
                     <Typography>{userPost.location}</Typography>
                   </Box>
                 </Box>
+                <IconButton>
+                  <DeleteIcon />
+                </IconButton>
               </Box>
               <hr></hr>
               <Typography sx={{ padding: 3 }}>

@@ -17,7 +17,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 
-const MainFeed = () => {
+const MainFeed = ({ setPage }) => {
   const queryClient = useQueryClient();
 
   const query = useQuery({
@@ -123,7 +123,7 @@ const MainFeed = () => {
                 </Box>
               </Box>
               <IconButton>
-                <SettingsIcon />
+                <SettingsIcon onClick={() => setPage("edit profile")} />
               </IconButton>
             </Box>
             <hr></hr>

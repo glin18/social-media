@@ -12,6 +12,7 @@ import NewPost from "./pages/NewPost";
 import Welcome from "./pages/Welcome";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import UserPage from "./pages/UserPage";
+import EditProfile from "./pages/EditProfile";
 
 function App() {
   const [modes, setModes] = useState("dark");
@@ -56,6 +57,8 @@ function App() {
             <NewPost setPage={setPage} />
           ) : page === "user page" ? (
             <UserPage />
+          ) : page === "edit profile" ? (
+            <EditProfile />
           ) : (
             <Welcome setPage={setPage} />
           )}

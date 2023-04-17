@@ -53,7 +53,7 @@ export const getUserPosts = async (req, res) => {
 export const deletePost = async (req, res) => {
   try {
     const { id } = req.params;
-    const post = await Post.findByIdAndDelete({ id });
+    const post = await Post.findByIdAndDelete(id);
     res.status(200).json("Delete Successful");
   } catch (err) {
     res.status(404).json({ message: err.message });

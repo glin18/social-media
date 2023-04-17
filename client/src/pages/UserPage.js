@@ -42,6 +42,29 @@ const UserPage = () => {
     },
   });
 
+  const deletePostMutation = useMutation({
+    mutationFn: (_id) => {
+      const accessToken = localStorage.getItem("access token");
+      const decoded = jwt_decode(accessToken);
+      console.log(decoded);
+      const id = decoded.id;
+      const config = {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      };
+      return axios
+        .delete(`http://localhost:3001/post/${_id}`, config)
+        .then((res) => {
+          return res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["userPosts"]);
+    },
+  });
+
   const query = useQuery({
     queryKey: ["user"],
     queryFn: () => {
@@ -259,7 +282,9 @@ const UserPage = () => {
                     <Typography>{userPost.location}</Typography>
                   </Box>
                 </Box>
-                <IconButton>
+                <IconButton
+                  onClick={() => deletePostMutation.mutate(userPost._id)}
+                >
                   <DeleteIcon />
                 </IconButton>
               </Box>

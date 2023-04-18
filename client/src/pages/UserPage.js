@@ -257,7 +257,7 @@ const UserPage = ({ setPage }) => {
             <Typography sx={{ mt: 5 }}>You currently have no posts</Typography>
           )}
           {userPostsQuery.data.map((userPost) => (
-            <Paper elevation={3} sx={{ mt: 5, height: 600 }}>
+            <Paper elevation={3} sx={{ mt: 5, height: 650 }}>
               <Box
                 sx={{
                   display: "flex",
@@ -310,6 +310,12 @@ const UserPage = ({ setPage }) => {
                   ></img>
                 </Box>
               )}
+              <Typography sx={{ paddingLeft: 3 }}>
+                Created:{" "}
+                {userPost.createdAt.slice(0, 10) +
+                  " " +
+                  userPost.createdAt.slice(11, 16)}
+              </Typography>
             </Paper>
           ))}
         </Grid>

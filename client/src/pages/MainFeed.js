@@ -160,7 +160,7 @@ const MainFeed = ({ setPage }) => {
         </Grid>
         <Grid item xs={5}>
           {postsQuery.data.map((userPost) => (
-            <Paper elevation={3} sx={{ mt: 5, height: 600 }}>
+            <Paper elevation={3} sx={{ mt: 5, height: 650 }}>
               <Box
                 sx={{
                   display: "flex",
@@ -238,6 +238,12 @@ const MainFeed = ({ setPage }) => {
                   ></img>
                 </Box>
               )}
+              <Typography sx={{ paddingLeft: 3 }}>
+                Created:{" "}
+                {userPost.createdAt.slice(0, 10) +
+                  " " +
+                  userPost.createdAt.slice(11, 16)}
+              </Typography>
             </Paper>
           ))}
         </Grid>

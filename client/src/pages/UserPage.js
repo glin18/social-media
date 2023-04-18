@@ -17,7 +17,7 @@ import axios from "axios";
 import jwt_decode from "jwt-decode";
 import DeleteIcon from "@mui/icons-material/Delete";
 
-const UserPage = () => {
+const UserPage = ({ setPage }) => {
   const queryClient = useQueryClient();
 
   const userPostsQuery = useQuery({
@@ -146,7 +146,7 @@ const UserPage = () => {
                 </Box>
               </Box>
               <IconButton>
-                <SettingsIcon />
+                <SettingsIcon onClick={() => setPage("edit profile")} />
               </IconButton>
             </Box>
             <hr></hr>

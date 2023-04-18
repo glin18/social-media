@@ -56,7 +56,7 @@ function App() {
           ) : page === "new post" ? (
             <NewPost setPage={setPage} />
           ) : page === "user page" ? (
-            <UserPage />
+            <UserPage setPage={setPage} />
           ) : page === "edit profile" ? (
             <EditProfile setPage={setPage} />
           ) : (

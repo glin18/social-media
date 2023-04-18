@@ -1,9 +1,40 @@
 import React from "react";
 import { TextField, Box, Typography, Button, Avatar } from "@mui/material";
 import SettingsIcon from "@mui/icons-material/Settings";
+import axios from "axios";
+import jwt_decode from "jwt-decode";
 
-const EditProfile = () => {
-  const handleSubmit = () => {};
+const EditProfile = ({ setPage }) => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const data = new FormData(event.currentTarget);
+    const accessToken = localStorage.getItem("access token");
+    const decoded = jwt_decode(accessToken);
+    console.log(decoded);
+    const id = decoded.id;
+    const config = {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    };
+
+    axios
+      .post(
+        `http://localhost:3001/user/${id}/edit`,
+        {
+          firstName: data.get("firstName"),
+          lastName: data.get("lastName"),
+          location: data.get("location"),
+          occupation: data.get("occupation"),
+        },
+        config
+      )
+      .then((res) => {
+        console.log(res);
+        setPage("main");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <div>
       <Box

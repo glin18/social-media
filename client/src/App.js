@@ -58,7 +58,7 @@ function App() {
           ) : page === "user page" ? (
             <UserPage />
           ) : page === "edit profile" ? (
-            <EditProfile />
+            <EditProfile setPage={setPage} />
           ) : (
             <Welcome setPage={setPage} />
           )}

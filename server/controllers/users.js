@@ -11,6 +11,22 @@ export const getUser = async (req, res) => {
   }
 };
 
+export const editUser = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { firstName, lastName, location, occupation } = req.body;
+    const user = await User.findByIdAndUpdate(id, {
+      firstName,
+      lastName,
+      location,
+      occupation,
+    });
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(404).json({ message: err.message });
+  }
+};
+
 // Get User Friends
 export const getUserFriends = async (req, res) => {
   try {

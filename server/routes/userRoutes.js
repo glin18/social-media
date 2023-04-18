@@ -3,6 +3,7 @@ import {
   getUser,
   getUserFriends,
   addRemoveFriend,
+  editUser,
 } from "../controllers/users.js";
 import { verifyToken } from "../middleware/auth.js";
 
@@ -13,5 +14,7 @@ router.get("/:id", verifyToken, getUser);
 router.get("/:id/friends", verifyToken, getUserFriends);
 
 router.get("/:id/:friendId", verifyToken, addRemoveFriend);
+
+router.post("/:id/edit", verifyToken, editUser);
 
 export default router;

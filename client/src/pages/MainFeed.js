@@ -87,6 +87,29 @@ const MainFeed = ({ setPage }) => {
     },
   });
 
+  const likePostMutation = useMutation({
+    mutationFn: (postId) => {
+      const accessToken = localStorage.getItem("access token");
+      const decoded = jwt_decode(accessToken);
+      console.log(decoded);
+      const id = decoded.id;
+      const config = {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      };
+      return axios
+        .post(`http://localhost:3001/post/${postId}/like`, config, { id })
+        .then((res) => {
+          return res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["posts"]);
+    },
+  });
+
   if (query.isLoading || postsQuery.isLoading || friendsQuery.isLoading) {
     return <span>Loading...</span>;
   }
@@ -253,9 +276,12 @@ const MainFeed = ({ setPage }) => {
                     " " +
                     userPost.createdAt.slice(11, 16)}
                 </Typography>
-                <IconButton>
-                  <ThumbUpOffAltIcon></ThumbUpOffAltIcon>
-                </IconButton>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <Typography>{Object.keys(userPost.likes).length}</Typography>
+                  <IconButton>
+                    <ThumbUpOffAltIcon></ThumbUpOffAltIcon>
+                  </IconButton>
+                </Box>
               </Box>
             </Paper>
           ))}

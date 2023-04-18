@@ -137,11 +137,11 @@ const MainFeed = ({ setPage }) => {
             >
               <Box sx={{ display: "flex", gap: 2 }}>
                 <LocationOnIcon />
-                <Typography>Taipei, Taiwan</Typography>
+                <Typography>{query.data.location}</Typography>
               </Box>
               <Box sx={{ display: "flex", gap: 2 }}>
                 <WorkIcon />
-                <Typography>Software Developer, DMS</Typography>
+                <Typography>{query.data.occupation}</Typography>
               </Box>
             </Box>
             <hr></hr>

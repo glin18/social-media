@@ -120,7 +120,7 @@ const UserPage = ({ setPage }) => {
   return (
     <div>
       <Grid container spacing={5}>
-        <Grid item xs={5}>
+        <Grid item xs={12} md={5}>
           <Paper elevation={3} sx={{ mt: 5, height: 600 }}>
             <Box
               sx={{
@@ -252,7 +252,7 @@ const UserPage = ({ setPage }) => {
             ))}
           </Paper>
         </Grid>
-        <Grid item xs={7}>
+        <Grid item xs={12} md={7}>
           {userPostsQuery.data.length === 0 && (
             <Typography sx={{ mt: 5 }}>You currently have no posts</Typography>
           )}

@@ -11,6 +11,7 @@ import {
 import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
+import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
 import WorkIcon from "@mui/icons-material/Work";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -97,7 +98,7 @@ const MainFeed = ({ setPage }) => {
   return (
     <div>
       <Grid container spacing={5}>
-        <Grid item xs={3.5}>
+        <Grid item xs={12} md={3.5}>
           <Paper elevation={3} sx={{ mt: 5, height: 600 }}>
             <Box
               sx={{
@@ -158,7 +159,7 @@ const MainFeed = ({ setPage }) => {
             <hr></hr>
           </Paper>
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={12} md={5}>
           {postsQuery.data.map((userPost) => (
             <Paper elevation={3} sx={{ mt: 5, height: 650 }}>
               <Box
@@ -238,16 +239,28 @@ const MainFeed = ({ setPage }) => {
                   ></img>
                 </Box>
               )}
-              <Typography sx={{ paddingLeft: 3 }}>
-                Created:{" "}
-                {userPost.createdAt.slice(0, 10) +
-                  " " +
-                  userPost.createdAt.slice(11, 16)}
-              </Typography>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  paddingRight: 3,
+                }}
+              >
+                <Typography sx={{ paddingLeft: 3 }}>
+                  Created:{" "}
+                  {userPost.createdAt.slice(0, 10) +
+                    " " +
+                    userPost.createdAt.slice(11, 16)}
+                </Typography>
+                <IconButton>
+                  <ThumbUpOffAltIcon></ThumbUpOffAltIcon>
+                </IconButton>
+              </Box>
             </Paper>
           ))}
         </Grid>
-        <Grid item xs={3.5}>
+        <Grid item xs={12} md={3.5}>
           <Paper elevation={3} sx={{ mt: 5 }}>
             <Typography sx={{ fontWeight: "bold", pt: 3, pl: 3, pb: 2 }}>
               Friend List

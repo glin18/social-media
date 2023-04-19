@@ -12,6 +12,7 @@ import PersonAddIcon from "@mui/icons-material/PersonAdd";
 import PersonRemoveIcon from "@mui/icons-material/PersonRemove";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
+import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 import WorkIcon from "@mui/icons-material/Work";
 import SettingsIcon from "@mui/icons-material/Settings";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
@@ -285,7 +286,11 @@ const MainFeed = ({ setPage }) => {
                   <IconButton
                     onClick={() => likePostMutation.mutate(userPost._id)}
                   >
-                    <ThumbUpOffAltIcon></ThumbUpOffAltIcon>
+                    {query.data._id in userPost.likes ? (
+                      <ThumbUpAltIcon></ThumbUpAltIcon>
+                    ) : (
+                      <ThumbUpOffAltIcon></ThumbUpOffAltIcon>
+                    )}
                   </IconButton>
                 </Box>
               </Box>

@@ -97,7 +97,11 @@ const MainFeed = ({ setPage }) => {
         headers: { Authorization: `Bearer ${accessToken}` },
       };
       return axios
-        .post(`http://localhost:3001/post/${postId}/like`, config, { id })
+        .post(
+          `http://localhost:3001/post/${postId}/like`,
+          { userId: id },
+          config
+        )
         .then((res) => {
           return res.data;
         })
@@ -278,7 +282,9 @@ const MainFeed = ({ setPage }) => {
                 </Typography>
                 <Box sx={{ display: "flex", alignItems: "center" }}>
                   <Typography>{Object.keys(userPost.likes).length}</Typography>
-                  <IconButton>
+                  <IconButton
+                    onClick={() => likePostMutation.mutate(userPost._id)}
+                  >
                     <ThumbUpOffAltIcon></ThumbUpOffAltIcon>
                   </IconButton>
                 </Box>

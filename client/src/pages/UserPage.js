@@ -16,6 +16,8 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import jwt_decode from "jwt-decode";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ThumbUpOffAltIcon from "@mui/icons-material/ThumbUpOffAlt";
+import ThumbUpAltIcon from "@mui/icons-material/ThumbUpAlt";
 
 const UserPage = ({ setPage }) => {
   const queryClient = useQueryClient();
@@ -53,6 +55,33 @@ const UserPage = ({ setPage }) => {
       };
       return axios
         .delete(`http://localhost:3001/post/${_id}`, config)
+        .then((res) => {
+          return res.data;
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries(["userPosts"]);
+    },
+  });
+
+  const likePostMutation = useMutation({
+    mutationFn: (postId) => {
+      const accessToken = localStorage.getItem("access token");
+      const decoded = jwt_decode(accessToken);
+      console.log(decoded);
+      const id = decoded.id;
+      const config = {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      };
+      return axios
+        .post(
+          `http://localhost:3001/post/${postId}/like`,
+          { userId: id },
+          config
+        )
         .then((res) => {
           return res.data;
         })
@@ -310,12 +339,33 @@ const UserPage = ({ setPage }) => {
                   ></img>
                 </Box>
               )}
-              <Typography sx={{ paddingLeft: 3 }}>
-                Created:{" "}
-                {userPost.createdAt.slice(0, 10) +
-                  " " +
-                  userPost.createdAt.slice(11, 16)}
-              </Typography>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: "space-between",
+                  alignItems: "center",
+                  paddingRight: 3,
+                }}
+              >
+                <Typography sx={{ paddingLeft: 3 }}>
+                  Created:{" "}
+                  {userPost.createdAt.slice(0, 10) +
+                    " " +
+                    userPost.createdAt.slice(11, 16)}
+                </Typography>
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <Typography>{Object.keys(userPost.likes).length}</Typography>
+                  <IconButton
+                    onClick={() => likePostMutation.mutate(userPost._id)}
+                  >
+                    {query.data._id in userPost.likes ? (
+                      <ThumbUpAltIcon></ThumbUpAltIcon>
+                    ) : (
+                      <ThumbUpOffAltIcon></ThumbUpOffAltIcon>
+                    )}
+                  </IconButton>
+                </Box>
+              </Box>
             </Paper>
           ))}
         </Grid>

@@ -123,6 +123,16 @@ const MainFeed = ({ setPage }) => {
     return <span>An Error Occurred. Please try again</span>;
   }
 
+  const postLikes = () => {
+    let likes = 0;
+    postsQuery.data.forEach((post) => {
+      if (post.userId === query.data._id) {
+        likes += Object.keys(post.likes).length;
+      }
+    });
+    return likes;
+  };
+
   return (
     <div>
       <Grid container spacing={5}>
@@ -181,7 +191,7 @@ const MainFeed = ({ setPage }) => {
               </Box>
               <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Typography>Post Likes</Typography>
-                <Typography>69</Typography>
+                <Typography>{postLikes()}</Typography>
               </Box>
             </Box>
             <hr></hr>

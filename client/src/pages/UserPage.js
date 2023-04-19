@@ -146,6 +146,14 @@ const UserPage = ({ setPage }) => {
     return <span>An Error Occurred. Please try again</span>;
   }
 
+  const postLikes = () => {
+    let likes = 0;
+    userPostsQuery.data.forEach((post) => {
+      likes += Object.keys(post.likes).length;
+    });
+    return likes;
+  };
+
   return (
     <div>
       <Grid container spacing={5}>
@@ -208,7 +216,7 @@ const UserPage = ({ setPage }) => {
               </Box>
               <Box sx={{ display: "flex", justifyContent: "space-between" }}>
                 <Typography>Post Likes</Typography>
-                <Typography>69</Typography>
+                <Typography>{postLikes()}</Typography>
               </Box>
             </Box>
             <hr></hr>

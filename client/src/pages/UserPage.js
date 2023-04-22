@@ -254,7 +254,7 @@ const UserPage = ({ setPage }) => {
                   </Avatar>
                   <Box>
                     <Typography
-                      sx={{ fontWeight: "bold" }}
+                      sx={{ fontWeight: "bold", cursor: "pointer" }}
                       onClick={() => setPage("ID: " + friend._id)}
                     >
                       {friend.firstName.charAt(0).toUpperCase() +

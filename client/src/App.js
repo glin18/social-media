@@ -13,6 +13,7 @@ import Welcome from "./pages/Welcome";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import UserPage from "./pages/UserPage";
 import EditProfile from "./pages/EditProfile";
+import OtherUserPage from "./pages/OtherUserPage";
 
 function App() {
   const [modes, setModes] = useState("dark");
@@ -59,6 +60,8 @@ function App() {
             <UserPage setPage={setPage} />
           ) : page === "edit profile" ? (
             <EditProfile setPage={setPage} />
+          ) : page.startsWith("ID: ") ? (
+            <OtherUserPage setPage={setPage} accountId={page.slice(4)} />
           ) : (
             <Welcome setPage={setPage} />
           )}

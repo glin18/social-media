@@ -340,7 +340,10 @@ const MainFeed = ({ setPage }) => {
                     {friend.lastName[0].toUpperCase()}
                   </Avatar>
                   <Box>
-                    <Typography sx={{ fontWeight: "bold" }}>
+                    <Typography
+                      sx={{ fontWeight: "bold", cursor: "pointer" }}
+                      onClick={() => setPage("ID: " + friend._id)}
+                    >
                       {friend.firstName.charAt(0).toUpperCase() +
                         friend.firstName.slice(1)}{" "}
                       {friend.lastName.charAt(0).toUpperCase() +

@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { TextField, Box, Typography, Button, Avatar } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import axios from "axios";
 
 const Login = ({ setPage }) => {
+  const [error, setError] = useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -19,10 +21,12 @@ const Login = ({ setPage }) => {
       .then((res) => {
         console.log(res);
         localStorage.setItem("access token", res.data.token);
+        setError("");
         setPage("main");
       })
       .catch((err) => {
         console.log(err);
+        setError(err.response.data.message);
       });
   };
 
@@ -64,6 +68,7 @@ const Login = ({ setPage }) => {
         <Button variant="contained" sx={{ mb: 3 }} type="submit">
           Login
         </Button>
+        {error && <Typography>{error}</Typography>}
       </Box>
     </div>
   );

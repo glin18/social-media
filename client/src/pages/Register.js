@@ -12,6 +12,7 @@ const Register = ({ setPage }) => {
       lastName: data.get("lastName"),
       email: data.get("email"),
       password: data.get("password"),
+      password2: data.get("password2"),
     });
     axios
       .post("http://localhost:3001/auth/register", {
@@ -19,6 +20,7 @@ const Register = ({ setPage }) => {
         lastName: data.get("lastName"),
         email: data.get("email"),
         password: data.get("password"),
+        password2: data.get("password2"),
       })
       .then((res) => {
         console.log(res);
@@ -84,6 +86,7 @@ const Register = ({ setPage }) => {
         label="Repeat Password"
         variant="outlined"
         type="password"
+        name="password2"
         required
         sx={{ maxWidth: 400, width: "100%" }}
       />

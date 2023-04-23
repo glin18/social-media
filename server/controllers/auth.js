@@ -5,13 +5,19 @@ import User from "../models/User.js";
 // Register User
 export const registerUser = async (req, res) => {
   try {
-    console.log("Registering user");
-    const { firstName, lastName, email, password } = req.body;
-    console.log("User retrieved");
+    const { firstName, lastName, email, password, password2 } = req.body;
     const userExists = await User.findOne({ email });
     if (userExists) {
-      res.status(400);
-      throw new Error("User already exists");
+      return res.status(400).json({ message: "User already exists" });
+    }
+    if (password !== password2) {
+      return res.status(400).json({ message: "Passwords are not the same" });
+    }
+    if (password.length < 6) {
+      return res.status(400).json({ message: "Password is too short" });
+    }
+    if (!firstName || !email || !lastName) {
+      return res.status(400).json({ message: "Please fill all sections" });
     }
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);

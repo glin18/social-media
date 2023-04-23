@@ -10,7 +10,7 @@ const MainNavbar = ({ toggleMode, setPage }) => {
   return (
     <AppBar position="static">
       <Toolbar>
-        <IconButton
+        {/* <IconButton
           size="large"
           edge="start"
           color="inherit"
@@ -18,11 +18,11 @@ const MainNavbar = ({ toggleMode, setPage }) => {
           sx={{ mr: 2 }}
         >
           <MenuIcon />
-        </IconButton>
+        </IconButton> */}
         <Typography
           variant="h6"
           component="div"
-          sx={{ flexGrow: 1, fontWeight: "bold", cursor: "pointer" }}
+          sx={{ flexGrow: 1, fontWeight: "bold", cursor: "pointer", ml: 3 }}
           onClick={() => setPage("main")}
         >
           Social Media

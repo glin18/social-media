@@ -1,19 +1,21 @@
-import React from "react";
+import React, { useState } from "react";
 import { TextField, Box, Typography, Button, Avatar } from "@mui/material";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import axios from "axios";
 
 const Register = ({ setPage }) => {
+  const [error, setError] = useState("");
+
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      firstName: data.get("firstName"),
-      lastName: data.get("lastName"),
-      email: data.get("email"),
-      password: data.get("password"),
-      password2: data.get("password2"),
-    });
+    // console.log({
+    //   firstName: data.get("firstName"),
+    //   lastName: data.get("lastName"),
+    //   email: data.get("email"),
+    //   password: data.get("password"),
+    //   password2: data.get("password2"),
+    // });
     axios
       .post("http://localhost:3001/auth/register", {
         firstName: data.get("firstName"),
@@ -24,9 +26,11 @@ const Register = ({ setPage }) => {
       })
       .then((res) => {
         console.log(res);
+        setError("");
         setPage("main");
       })
       .catch((err) => {
+        setError(err.response.data.message);
         console.log(err);
       });
   };
@@ -93,6 +97,7 @@ const Register = ({ setPage }) => {
       <Button variant="contained" sx={{ mb: 3 }} type="submit">
         Register
       </Button>
+      {error && <Typography>{error}</Typography>}
     </Box>
   );
 };

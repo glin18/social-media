@@ -52,7 +52,7 @@ const EditProfile = ({ setPage }) => {
         <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
           <SettingsIcon />
         </Avatar>
-        <Typography variant="h4">Register</Typography>
+        <Typography variant="h4">Edit Profile</Typography>
         <TextField
           id="outlined-basic"
           label="First Name"
